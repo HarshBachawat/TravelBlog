@@ -9,9 +9,9 @@
         app:showAsAction="never" />
     <item
         android:id="@+id/action_add"
-        android:icon="@drawable/addicon"
-        app:showAsAction="always"
-        android:title="Add"/>
+        android:icon="@drawable/add_post"
+        android:title="Add"
+        app:showAsAction="always" />
     <item
         android:id="@+id/logout"
         android:orderInCategory="100"

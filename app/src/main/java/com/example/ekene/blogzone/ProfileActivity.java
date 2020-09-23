@@ -20,8 +20,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
-//import com.theartofdev.edmodo.cropper.CropImage;
-//import com.theartofdev.edmodo.cropper.CropImageView;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -73,13 +71,17 @@ public class ProfileActivity extends AppCompatActivity {
                             mDatabaseUsers.child(userID).child("name").setValue(name);
                             mDatabaseUsers.child(userID).child("image").setValue(downloadUrl);
 
-                            Toast.makeText(ProfileActivity.this, "Successful", Toast.LENGTH_SHORT).show();
-                            Intent i = new Intent(ProfileActivity.this, LoginActivity.class);
+                            Toast.makeText(ProfileActivity.this, "Profile Details Saved", Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(ProfileActivity.this, MainActivity.class);
                             startActivity(i);
+                            finish();
+
                         }
                     });
 
                 }
+                else
+                    Toast.makeText(ProfileActivity.this,"Please add all the Details",Toast.LENGTH_SHORT).show();
             }
         });
 

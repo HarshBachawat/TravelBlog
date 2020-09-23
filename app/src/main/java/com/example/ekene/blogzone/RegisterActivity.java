@@ -1,7 +1,6 @@
 package com.example.ekene.blogzone;
 
 import android.content.Intent;
-import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -41,6 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                RegisterActivity.this.finish();
             }
         });
         registerBtn.setOnClickListener(new View.OnClickListener() {
@@ -61,6 +61,7 @@ public class RegisterActivity extends AppCompatActivity {
                             Toast.makeText(RegisterActivity.this, "Registeration Succesful", Toast.LENGTH_SHORT).show();
                             Intent regIntent = new Intent(RegisterActivity.this, ProfileActivity.class);
                             regIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            RegisterActivity.this.finish();
                             startActivity(regIntent);
                         }
                     });
@@ -70,5 +71,10 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        this.finishAffinity();
     }
 }

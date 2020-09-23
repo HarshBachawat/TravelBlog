@@ -1,12 +1,9 @@
 package com.example.ekene.blogzone;
 
-/**
- * Created by EKENE on 11/4/2017.
- */
 
 public class Blogzone {
 
-    private String title, desc, imageUrl, username;
+    private String title, desc,imageUrl, username;
 
     public Blogzone(String title, String desc, String imageUrl, String username) {
         this.title = title;
@@ -33,10 +30,6 @@ public class Blogzone {
         this.title = title;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
-
     public String getImageUrl() {
         return imageUrl;
     }
@@ -45,8 +38,10 @@ public class Blogzone {
         return title;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDesc(){ return desc;}
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
 }

@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText loginEmail, loginPass;
+    private TextView signup;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     private Button loginBtn;
@@ -34,6 +36,16 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn = (Button)findViewById(R.id.loginBtn);
         loginEmail = (EditText)findViewById(R.id.login_email);
         loginPass = (EditText)findViewById(R.id.login_password);
+        signup = (TextView)findViewById(R.id.signUpTxtView);
+
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent register = new Intent(LoginActivity.this,RegisterActivity.class);
+                startActivity(register);
+                LoginActivity.this.finish();
+            }
+        });
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
@@ -41,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(LoginActivity.this, "PROCESSING....", Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this, "Authenticating...", Toast.LENGTH_LONG).show();
                 String email = loginEmail.getText().toString().trim();
                 String password = loginPass.getText().toString().trim();
 
@@ -53,13 +65,13 @@ public class LoginActivity extends AppCompatActivity {
                             if (task.isSuccessful()){
                                 checkUserExistence();
                             }else {
-                                Toast.makeText(LoginActivity.this, "Couldn't login, User not found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "Couldn't Login, User not found", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
                 }else {
 
-                    Toast.makeText(LoginActivity.this, "Complete all fields", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Fill all the fields", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -74,8 +86,9 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (dataSnapshot.hasChild(user_id)){
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    LoginActivity.this.finish();
                 }else {
-                    Toast.makeText(LoginActivity.this, "User not registered!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "User does not exist!!", Toast.LENGTH_SHORT).show();
                 }
             }
 
